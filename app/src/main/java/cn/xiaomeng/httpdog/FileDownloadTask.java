@@ -23,7 +23,7 @@ class FileDownloadTask extends AsyncTask<Void, Long, Boolean> {
 
     public FileDownloadTask(String url, File target, FileDownloadCallback callback) {
         this.url = url;
-        this.okHttpClient = OkHttpFinal.getInstance().getOkHttpClientBuilder().build();
+        this.okHttpClient = HttpDog.getInstance().getOkHttpClientBuilder().build();
         this.callback = callback;
         this.target = target;
 

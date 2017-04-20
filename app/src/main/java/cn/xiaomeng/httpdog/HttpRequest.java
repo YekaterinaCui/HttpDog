@@ -35,7 +35,7 @@ public final class HttpRequest {
     }
 
     public static void get(String url, RequestParams params, long timeout, BaseHttpRequestCallback callback) {
-        OkHttpClient.Builder builder = OkHttpFinal.getInstance().getOkHttpClientBuilder();
+        OkHttpClient.Builder builder = HttpDog.getInstance().getOkHttpClientBuilder();
         builder.readTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.connectTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.writeTimeout(timeout, TimeUnit.MILLISECONDS);
@@ -69,7 +69,7 @@ public final class HttpRequest {
     }
 
     public static void post(String url, RequestParams params, long timeout, BaseHttpRequestCallback callback) {
-        OkHttpClient.Builder builder = OkHttpFinal.getInstance().getOkHttpClientBuilder();
+        OkHttpClient.Builder builder = HttpDog.getInstance().getOkHttpClientBuilder();
         builder.readTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.connectTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.writeTimeout(timeout, TimeUnit.MILLISECONDS);
@@ -103,7 +103,7 @@ public final class HttpRequest {
     }
 
     public static void put(String url, RequestParams params, long timeout, BaseHttpRequestCallback callback) {
-        OkHttpClient.Builder builder = OkHttpFinal.getInstance().getOkHttpClientBuilder();
+        OkHttpClient.Builder builder = HttpDog.getInstance().getOkHttpClientBuilder();
         builder.readTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.connectTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.writeTimeout(timeout, TimeUnit.MILLISECONDS);
@@ -137,7 +137,7 @@ public final class HttpRequest {
     }
 
     public static void delete(String url, RequestParams params, long timeout, BaseHttpRequestCallback callback) {
-        OkHttpClient.Builder builder = OkHttpFinal.getInstance().getOkHttpClientBuilder();
+        OkHttpClient.Builder builder = HttpDog.getInstance().getOkHttpClientBuilder();
         builder.readTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.connectTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.writeTimeout(timeout, TimeUnit.MILLISECONDS);
@@ -171,7 +171,7 @@ public final class HttpRequest {
     }
 
     public static void head(String url, RequestParams params, long timeout, BaseHttpRequestCallback callback) {
-        OkHttpClient.Builder builder = OkHttpFinal.getInstance().getOkHttpClientBuilder();
+        OkHttpClient.Builder builder = HttpDog.getInstance().getOkHttpClientBuilder();
         builder.readTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.connectTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.writeTimeout(timeout, TimeUnit.MILLISECONDS);
@@ -205,7 +205,7 @@ public final class HttpRequest {
     }
 
     public static void patch(String url, RequestParams params, long timeout, BaseHttpRequestCallback callback) {
-        OkHttpClient.Builder builder = OkHttpFinal.getInstance().getOkHttpClientBuilder();
+        OkHttpClient.Builder builder = HttpDog.getInstance().getOkHttpClientBuilder();
         builder.readTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.connectTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.writeTimeout(timeout, TimeUnit.MILLISECONDS);
@@ -251,7 +251,7 @@ public final class HttpRequest {
     private static void executeRequest(cn.xiaomeng.httpdog.Method method, String url, RequestParams params, OkHttpClient.Builder builder, BaseHttpRequestCallback callback) {
         if (!StringUtils.isEmpty(url)) {
             if(builder == null) {
-                builder = OkHttpFinal.getInstance().getOkHttpClientBuilder();
+                builder = HttpDog.getInstance().getOkHttpClientBuilder();
             }
             cn.xiaomeng.httpdog.OkHttpTask task = new cn.xiaomeng.httpdog.OkHttpTask(method, url, params, builder, callback);
             task.execute();

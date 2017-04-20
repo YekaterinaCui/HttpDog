@@ -44,13 +44,13 @@ public class RequestParams {
     private void init() {
         headers.add("charset", "UTF-8");
 
-        List<Part> commonParams = OkHttpFinal.getInstance().getCommonParams();
+        List<Part> commonParams = HttpDog.getInstance().getCommonParams();
         if (commonParams != null && commonParams.size() > 0){
             params.addAll(commonParams);
         }
 
         //添加公共header
-        Headers commonHeaders = OkHttpFinal.getInstance().getCommonHeaders();
+        Headers commonHeaders = HttpDog.getInstance().getCommonHeaders();
         if ( commonHeaders != null && commonHeaders.size() > 0 ) {
             for (int i = 0; i < commonHeaders.size(); i++) {
                 String key = commonHeaders.name(i);

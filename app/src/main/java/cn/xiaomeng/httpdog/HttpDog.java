@@ -13,17 +13,17 @@ import okhttp3.CookieJar;
 import okhttp3.Headers;
 import okhttp3.OkHttpClient;
 
-public class OkHttpFinal {
+public class HttpDog {
 
     private OkHttpClient okHttpClient;
 
-    private static cn.xiaomeng.httpdog.OkHttpFinal okHttpFinal;
-    private cn.xiaomeng.httpdog.OkHttpFinalConfiguration configuration;
+    private static HttpDog httpDog;
+    private HttpDogConfiguration configuration;
 
-    private OkHttpFinal() {
+    private HttpDog() {
     }
 
-    public synchronized void init(OkHttpFinalConfiguration configuration) {
+    public synchronized void init(HttpDogConfiguration configuration) {
         this.configuration = configuration;
 
         long timeout = configuration.getTimeout();
@@ -81,11 +81,11 @@ public class OkHttpFinal {
 
     }
 
-    public static cn.xiaomeng.httpdog.OkHttpFinal getInstance() {
-        if (okHttpFinal == null) {
-            okHttpFinal = new cn.xiaomeng.httpdog.OkHttpFinal();
+    public static HttpDog getInstance() {
+        if (httpDog == null) {
+            httpDog = new HttpDog();
         }
-        return okHttpFinal;
+        return httpDog;
     }
 
     /**

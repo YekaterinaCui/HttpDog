@@ -20,7 +20,7 @@ import okhttp3.Interceptor;
 import okhttp3.Response;
 import okio.Buffer;
 
-public class OkHttpFinalConfiguration {
+public class HttpDogConfiguration {
 
     private List<Part> commonParams;
     protected Headers commonHeaders;
@@ -41,7 +41,7 @@ public class OkHttpFinalConfiguration {
     private SSLSocketFactory sslSocketFactory;
     private Dispatcher dispatcher;
 
-    private OkHttpFinalConfiguration(final Builder builder) {
+    private HttpDogConfiguration(final Builder builder) {
         this.commonParams = builder.commonParams;
         this.commonHeaders = builder.commonHeaders;
         this.certificateList = builder.certificateList;
@@ -304,8 +304,8 @@ public class OkHttpFinalConfiguration {
             return this;
         }
 
-        public cn.xiaomeng.httpdog.OkHttpFinalConfiguration build() {
-            return new cn.xiaomeng.httpdog.OkHttpFinalConfiguration(this);
+        public HttpDogConfiguration build() {
+            return new HttpDogConfiguration(this);
         }
     }
 
