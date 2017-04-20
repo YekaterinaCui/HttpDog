@@ -8,7 +8,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0.0"
+        versionName "1.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -41,7 +41,7 @@ publish {
     userOrg = 'jingcui'
     groupId = 'cn.xiaomeng'
     artifactId = 'httpdog'
-    publishVersion = '1.0.0'
+    publishVersion = '1.0.1'
     desc = 'httpdog for okhttp3'
     website = 'https://github.com/YekaterinaCui/HttpDog'
 }
@@ -55,3 +55,4 @@ allprojects {
         options.addStringOption('encoding', 'UTF-8')
     }
 }
+// ./gradlew clean build bintrayUpload -PbintrayUser=jingcui -PbintrayKey= -PdryRun=false
