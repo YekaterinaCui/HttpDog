@@ -144,10 +144,6 @@ public class HttpDog {
         return configuration.getHostnameVerifier();
     }
 
-    public long getTimeout() {
-        return configuration.getTimeout();
-    }
-
     public Headers getCommonHeaders() {
         return configuration.getCommonHeaders();
     }
