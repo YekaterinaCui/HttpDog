@@ -180,10 +180,8 @@ class OkHttpTask implements Callback, ProgressCallback {
             responseData.setResponseNull(true);
             responseData.setCode(BaseHttpRequestCallback.ERROR_RESPONSE_UNKNOWN);
             if (responseData.isTimeout()) {
-                //responseData.setMessage("request timeout");
                 responseData.setMessage("请求超时");
             } else {
-                //responseData.setMessage("http exception");
                 responseData.setMessage("网络异常");
             }
         }
@@ -302,7 +300,6 @@ class OkHttpTask implements Callback, ProgressCallback {
             }
         }
         //接口请求失败
-        //callback.onFailure(BaseHttpRequestCallback.ERROR_RESPONSE_DATA_PARSE_EXCEPTION, "Data parse exception");
         callback.onFailure(BaseHttpRequestCallback.ERROR_RESPONSE_DATA_PARSE_EXCEPTION, "数据解析异常");
     }
 }
