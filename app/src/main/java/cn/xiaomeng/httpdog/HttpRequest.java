@@ -8,7 +8,10 @@ import okhttp3.Call;
 import okhttp3.OkHttpClient;
 
 /**
- * Desction:http请求类
+ * 类名：HttpRequest
+ * 编辑时间：2018/4/4
+ * 编辑人：崔婧
+ * 简介：http请求类
  */
 public final class HttpRequest {
 
@@ -26,25 +29,28 @@ public final class HttpRequest {
 
     /**
      * Get请求
-     * @param url
-     * @param params
-     * @param callback
+     *
+     * @param url      路由
+     * @param params   参数
+     * @param callback 回调
      */
     public static void get(String url, RequestParams params, BaseHttpRequestCallback callback) {
         OkHttpClient.Builder builder = HttpDog.getInstance().getOkHttpClientBuilder();
-        executeRequest(cn.xiaomeng.httpdog.Method.GET, url, params, builder, callback);
+        executeRequest(Method.GET, url, params, builder, callback);
     }
 
-    public static void get(String url, RequestParams params, long timeout, BaseHttpRequestCallback callback) {
+    public static void get(String url, RequestParams params, long timeout,
+                           BaseHttpRequestCallback callback) {
         OkHttpClient.Builder builder = HttpDog.getInstance().getOkHttpClientBuilder();
         builder.readTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.connectTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.writeTimeout(timeout, TimeUnit.MILLISECONDS);
-        executeRequest(cn.xiaomeng.httpdog.Method.GET, url, params, builder, callback);
+        executeRequest(Method.GET, url, params, builder, callback);
     }
 
-    public static void get(String url, RequestParams params, OkHttpClient.Builder builder, BaseHttpRequestCallback callback) {
-        executeRequest(cn.xiaomeng.httpdog.Method.GET, url, params, builder, callback);
+    public static void get(String url, RequestParams params, OkHttpClient.Builder builder,
+                           BaseHttpRequestCallback callback) {
+        executeRequest(Method.GET, url, params, builder, callback);
     }
 
     public static void post(String url) {
@@ -61,25 +67,28 @@ public final class HttpRequest {
 
     /**
      * Post请求
-     * @param url
-     * @param params
-     * @param callback
+     *
+     * @param url      路由
+     * @param params   参数
+     * @param callback 回调
      */
     public static void post(String url, RequestParams params, BaseHttpRequestCallback callback) {
         OkHttpClient.Builder builder = HttpDog.getInstance().getOkHttpClientBuilder();
-        executeRequest(cn.xiaomeng.httpdog.Method.POST, url, params, builder, callback);
+        executeRequest(Method.POST, url, params, builder, callback);
     }
 
-    public static void post(String url, RequestParams params, long timeout, BaseHttpRequestCallback callback) {
+    public static void post(String url, RequestParams params, long timeout,
+                            BaseHttpRequestCallback callback) {
         OkHttpClient.Builder builder = HttpDog.getInstance().getOkHttpClientBuilder();
         builder.readTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.connectTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.writeTimeout(timeout, TimeUnit.MILLISECONDS);
-        executeRequest(cn.xiaomeng.httpdog.Method.POST, url, params, builder, callback);
+        executeRequest(Method.POST, url, params, builder, callback);
     }
 
-    public static void post(String url, RequestParams params, OkHttpClient.Builder builder, BaseHttpRequestCallback callback) {
-        executeRequest(cn.xiaomeng.httpdog.Method.POST, url, params, builder, callback);
+    public static void post(String url, RequestParams params, OkHttpClient.Builder builder,
+                            BaseHttpRequestCallback callback) {
+        executeRequest(Method.POST, url, params, builder, callback);
     }
 
     public static void put(String url) {
@@ -96,25 +105,28 @@ public final class HttpRequest {
 
     /**
      * put请求
-     * @param url
-     * @param params
-     * @param callback
+     *
+     * @param url      路由
+     * @param params   参数
+     * @param callback 回调
      */
     public static void put(String url, RequestParams params, BaseHttpRequestCallback callback) {
         OkHttpClient.Builder builder = HttpDog.getInstance().getOkHttpClientBuilder();
-        executeRequest(cn.xiaomeng.httpdog.Method.PUT, url, params, builder, callback);
+        executeRequest(Method.PUT, url, params, builder, callback);
     }
 
-    public static void put(String url, RequestParams params, long timeout, BaseHttpRequestCallback callback) {
+    public static void put(String url, RequestParams params,
+                           long timeout, BaseHttpRequestCallback callback) {
         OkHttpClient.Builder builder = HttpDog.getInstance().getOkHttpClientBuilder();
         builder.readTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.connectTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.writeTimeout(timeout, TimeUnit.MILLISECONDS);
-        executeRequest(cn.xiaomeng.httpdog.Method.PUT, url, params, builder, callback);
+        executeRequest(Method.PUT, url, params, builder, callback);
     }
 
-    public static void put(String url, RequestParams params, OkHttpClient.Builder builder, BaseHttpRequestCallback callback) {
-        executeRequest(cn.xiaomeng.httpdog.Method.PUT, url, params, builder, callback);
+    public static void put(String url, RequestParams params,
+                           OkHttpClient.Builder builder, BaseHttpRequestCallback callback) {
+        executeRequest(Method.PUT, url, params, builder, callback);
     }
 
     public static void delete(String url) {
@@ -131,25 +143,28 @@ public final class HttpRequest {
 
     /**
      * delete请求
-     * @param url
-     * @param params
-     * @param callback
+     *
+     * @param url      路由
+     * @param params   参数
+     * @param callback 回调
      */
     public static void delete(String url, RequestParams params, BaseHttpRequestCallback callback) {
         OkHttpClient.Builder builder = HttpDog.getInstance().getOkHttpClientBuilder();
-        executeRequest(cn.xiaomeng.httpdog.Method.DELETE, url, params, builder, callback);
+        executeRequest(Method.DELETE, url, params, builder, callback);
     }
 
-    public static void delete(String url, RequestParams params, long timeout, BaseHttpRequestCallback callback) {
+    public static void delete(String url, RequestParams params,
+                              long timeout, BaseHttpRequestCallback callback) {
         OkHttpClient.Builder builder = HttpDog.getInstance().getOkHttpClientBuilder();
         builder.readTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.connectTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.writeTimeout(timeout, TimeUnit.MILLISECONDS);
-        executeRequest(cn.xiaomeng.httpdog.Method.DELETE, url, params, builder, callback);
+        executeRequest(Method.DELETE, url, params, builder, callback);
     }
 
-    public static void delete(String url, RequestParams params, OkHttpClient.Builder builder, BaseHttpRequestCallback callback) {
-        executeRequest(cn.xiaomeng.httpdog.Method.DELETE, url, params, builder, callback);
+    public static void delete(String url, RequestParams params,
+                              OkHttpClient.Builder builder, BaseHttpRequestCallback callback) {
+        executeRequest(Method.DELETE, url, params, builder, callback);
     }
 
     public static void head(String url) {
@@ -166,25 +181,28 @@ public final class HttpRequest {
 
     /**
      * head请求
-     * @param url
-     * @param params
-     * @param callback
+     *
+     * @param url      路由
+     * @param params   参数
+     * @param callback 回调
      */
     public static void head(String url, RequestParams params, BaseHttpRequestCallback callback) {
         OkHttpClient.Builder builder = HttpDog.getInstance().getOkHttpClientBuilder();
-        executeRequest(cn.xiaomeng.httpdog.Method.HEAD, url, params, builder, callback);
+        executeRequest(Method.HEAD, url, params, builder, callback);
     }
 
-    public static void head(String url, RequestParams params, long timeout, BaseHttpRequestCallback callback) {
+    public static void head(String url, RequestParams params,
+                            long timeout, BaseHttpRequestCallback callback) {
         OkHttpClient.Builder builder = HttpDog.getInstance().getOkHttpClientBuilder();
         builder.readTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.connectTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.writeTimeout(timeout, TimeUnit.MILLISECONDS);
-        executeRequest(cn.xiaomeng.httpdog.Method.HEAD, url, params, builder, callback);
+        executeRequest(Method.HEAD, url, params, builder, callback);
     }
 
-    public static void head(String url, RequestParams params, OkHttpClient.Builder builder, BaseHttpRequestCallback callback) {
-        executeRequest(cn.xiaomeng.httpdog.Method.HEAD, url, params, builder, callback);
+    public static void head(String url, RequestParams params,
+                            OkHttpClient.Builder builder, BaseHttpRequestCallback callback) {
+        executeRequest(Method.HEAD, url, params, builder, callback);
     }
 
     public static void patch(String url) {
@@ -201,39 +219,43 @@ public final class HttpRequest {
 
     /**
      * patch请求
-     * @param url
-     * @param params
-     * @param callback
+     *
+     * @param url      路由
+     * @param params   参数
+     * @param callback 回调
      */
     public static void patch(String url, RequestParams params, BaseHttpRequestCallback callback) {
         OkHttpClient.Builder builder = HttpDog.getInstance().getOkHttpClientBuilder();
-        executeRequest(cn.xiaomeng.httpdog.Method.PATCH, url, params, builder, callback);
+        executeRequest(Method.PATCH, url, params, builder, callback);
     }
 
-    public static void patch(String url, RequestParams params, long timeout, BaseHttpRequestCallback callback) {
+    public static void patch(String url, RequestParams params,
+                             long timeout, BaseHttpRequestCallback callback) {
         OkHttpClient.Builder builder = HttpDog.getInstance().getOkHttpClientBuilder();
         builder.readTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.connectTimeout(timeout, TimeUnit.MILLISECONDS);
         builder.writeTimeout(timeout, TimeUnit.MILLISECONDS);
-        executeRequest(cn.xiaomeng.httpdog.Method.PATCH, url, params, builder, callback);
+        executeRequest(Method.PATCH, url, params, builder, callback);
     }
 
-    public static void patch(String url, RequestParams params, OkHttpClient.Builder builder, BaseHttpRequestCallback callback) {
-        executeRequest(cn.xiaomeng.httpdog.Method.PATCH, url, params, builder, callback);
+    public static void patch(String url, RequestParams params,
+                             OkHttpClient.Builder builder, BaseHttpRequestCallback callback) {
+        executeRequest(Method.PATCH, url, params, builder, callback);
     }
 
     /**
      * 取消请求
-     * @param url
+     *
+     * @param url 路由
      */
     public static void cancel(String url) {
-        if ( !StringUtils.isEmpty(url) ) {
-            Call call = cn.xiaomeng.httpdog.OkHttpCallManager.getInstance().getCall(url);
-            if ( call != null ) {
+        if (!StringUtils.isEmpty(url)) {
+            Call call = OkHttpCallManager.getInstance().getCall(url);
+            if (call != null) {
                 call.cancel();
             }
 
-            cn.xiaomeng.httpdog.OkHttpCallManager.getInstance().removeCall(url);
+            OkHttpCallManager.getInstance().removeCall(url);
         }
     }
 
@@ -243,23 +265,25 @@ public final class HttpRequest {
 
     /**
      * 下载文件
-     * @param url
-     * @param target 保存的文件
-     * @param callback
+     *
+     * @param url      路由
+     * @param target   文件
+     * @param callback 回调
      */
     public static void download(String url, File target, FileDownloadCallback callback) {
         if (!StringUtils.isEmpty(url) && target != null) {
-            cn.xiaomeng.httpdog.FileDownloadTask task = new cn.xiaomeng.httpdog.FileDownloadTask(url, target, callback);
+            FileDownloadTask task = new FileDownloadTask(url, target, callback);
             task.execute();
         }
     }
 
-    private static void executeRequest(cn.xiaomeng.httpdog.Method method, String url, RequestParams params, OkHttpClient.Builder builder, BaseHttpRequestCallback callback) {
+    private static void executeRequest(Method method, String url, RequestParams params,
+                                       OkHttpClient.Builder builder, BaseHttpRequestCallback callback) {
         if (!StringUtils.isEmpty(url)) {
-            if(builder == null) {
+            if (builder == null) {
                 builder = HttpDog.getInstance().getOkHttpClientBuilder();
             }
-            cn.xiaomeng.httpdog.OkHttpTask task = new cn.xiaomeng.httpdog.OkHttpTask(method, url, params, builder, callback);
+            OkHttpTask task = new OkHttpTask(method, url, params, builder, callback);
             task.execute();
         }
     }

@@ -6,14 +6,18 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Desction:Http请求辅助类，用于处理UI已经销毁，但后台线程还在进行的问题；
+ * 类名：HttpTaskHandler
+ * 编辑时间：2018/4/4
+ * 编辑人：崔婧
+ * 简介：Http请求辅助类，用于处理UI已经销毁，但后台线程还在进行的问题；
  */
 public class HttpTaskHandler {
 
-    /** 正在请求的任务集合 */
-    private static Map<String, List<cn.xiaomeng.httpdog.OkHttpTask>> httpTaskMap;
-    /** 单例请求处理器 */
-    private static cn.xiaomeng.httpdog.HttpTaskHandler httpTaskHandler = null;
+    //正在请求的任务集合
+    private static Map<String, List<OkHttpTask>> httpTaskMap;
+
+    //单例请求处理器
+    private static HttpTaskHandler httpTaskHandler = null;
 
     private HttpTaskHandler() {
         httpTaskMap = new ConcurrentHashMap<>();
@@ -21,17 +25,20 @@ public class HttpTaskHandler {
 
     /**
      * 获得处理器实例
+     *
+     * @return 任务处理器实例
      */
-    public static cn.xiaomeng.httpdog.HttpTaskHandler getInstance() {
+    public static HttpTaskHandler getInstance() {
         if (httpTaskHandler == null) {
-            httpTaskHandler = new cn.xiaomeng.httpdog.HttpTaskHandler();
+            httpTaskHandler = new HttpTaskHandler();
         }
         return httpTaskHandler;
     }
 
     /**
      * 移除KEY
-     * @param key
+     *
+     * @param key 任务名
      */
     public void removeTask(String key) {
         if (httpTaskMap.containsKey(key)) {
@@ -42,24 +49,26 @@ public class HttpTaskHandler {
 
     /**
      * 将请求放到Map里面
-     * @param key
-     * @param task
+     *
+     * @param key  任务名
+     * @param task 任务
      */
-    void addTask(String key, cn.xiaomeng.httpdog.OkHttpTask task) {
+    void addTask(String key, OkHttpTask task) {
         if (httpTaskMap.containsKey(key)) {
-            List<cn.xiaomeng.httpdog.OkHttpTask> tasks = httpTaskMap.get(key);
+            List<OkHttpTask> tasks = httpTaskMap.get(key);
             tasks.add(task);
             httpTaskMap.put(key, tasks);
         } else {
-            List<cn.xiaomeng.httpdog.OkHttpTask> tasks = new ArrayList<>();
+            List<OkHttpTask> tasks = new ArrayList<>();
             tasks.add(task);
             httpTaskMap.put(key, tasks);
         }
     }
 
     /**
-     * 判断是否存在
-     * @param key
+     * 判断任务是否存在
+     *
+     * @param key 任务名
      * @return
      */
     boolean contains(String key) {

@@ -4,6 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class MD5Coder {
+
     // 全局数组
     private final static String[] strDigits = {
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"
@@ -11,8 +12,9 @@ public class MD5Coder {
 
     /**
      * 返回形式为数字跟字符串
-     * @param bByte
-     * @return
+     *
+     * @param bByte 字节
+     * @return 字符串
      */
     private static String byteToArrayString(byte bByte) {
         int iRet = bByte;
@@ -26,8 +28,9 @@ public class MD5Coder {
 
     /**
      * 返回形式只为数字
-     * @param bByte
-     * @return
+     *
+     * @param bByte 字节
+     * @return 字符串
      */
     private static String byteToNum(byte bByte) {
         int iRet = bByte;
@@ -39,8 +42,9 @@ public class MD5Coder {
 
     /**
      * 转换字节数组为16进制字串
-     * @param bByte
-     * @return
+     *
+     * @param bByte 字节
+     * @return 字符串
      */
     private static String byteToString(byte[] bByte) {
         StringBuffer sBuffer = new StringBuffer();
@@ -52,8 +56,9 @@ public class MD5Coder {
 
     /**
      * 获取MD5编码
-     * @param source
-     * @return
+     *
+     * @param source 需要编码的source
+     * @return 字符串
      */
     public static String getMD5Code(String source) {
         String resultString = null;

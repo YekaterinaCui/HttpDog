@@ -10,7 +10,10 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- * Desction:扩展SDcard获取
+ * 类名：ExternalStorage
+ * 编辑时间：2018/4/4
+ * 编辑人：崔婧
+ * 简介：扩展SDcard获取
  */
 public class ExternalStorage {
 
@@ -66,7 +69,9 @@ public class ExternalStorage {
 
                         // don't add the default mount path
                         // it's already in the list.
-                        if (!element.equals("/mnt/sdcard")) { mMounts.add(element); }
+                        if (!element.equals("/mnt/sdcard")) {
+                            mMounts.add(element);
+                        }
                     }
                 }
             }
@@ -84,8 +89,12 @@ public class ExternalStorage {
                         String[] lineElements = line.split(" ");
                         String element = lineElements[2];
 
-                        if (element.contains(":")) { element = element.substring(0, element.indexOf(":")); }
-                        if (!element.equals("/mnt/sdcard")) { mVold.add(element); }
+                        if (element.contains(":")) {
+                            element = element.substring(0, element.indexOf(":"));
+                        }
+                        if (!element.equals("/mnt/sdcard")) {
+                            mVold.add(element);
+                        }
                     }
                 }
             }
@@ -95,7 +104,9 @@ public class ExternalStorage {
 
         for (int i = 0; i < mMounts.size(); i++) {
             String mount = mMounts.get(i);
-            if (!mVold.contains(mount)) { mMounts.remove(i--); }
+            if (!mVold.contains(mount)) {
+                mMounts.remove(i--);
+            }
         }
         mVold.clear();
 

@@ -1,18 +1,18 @@
-/* 
-* Copyright (C) 2011 pengjianbo iBoxPay Information Technology Co.,Ltd. 
-* 
-* All right reserved. 
-* 
-* This software is the confidential and proprietary 
-* information of iBoxPay Company of China. 
-* ("Confidential Information"). You shall not disclose 
-* such Confidential Information and shall use it only 
-* in accordance with the terms of the contract agreement 
-* you entered into with iBoxpay inc. 
-* 
-* $Id: CountDownTimer.java 552 2013-10-09 07:21:31Z huangliqing $
-* 
-*/
+/*
+ * Copyright (C) 2011 pengjianbo iBoxPay Information Technology Co.,Ltd.
+ *
+ * All right reserved.
+ *
+ * This software is the confidential and proprietary
+ * information of iBoxPay Company of China.
+ * ("Confidential Information"). You shall not disclose
+ * such Confidential Information and shall use it only
+ * in accordance with the terms of the contract agreement
+ * you entered into with iBoxpay inc.
+ *
+ * $Id: CountDownTimer.java 552 2013-10-09 07:21:31Z huangliqing $
+ *
+ */
 
 package cn.xiaomeng.httpdog.tools;
 
@@ -22,25 +22,25 @@ import android.os.SystemClock;
 
 /**
  * 解决系统的CountDownTimer cancel失效问题 <br/>
- *
+ * <p>
  * Schedule a countdown until a time in the future, with
  * regular notifications on intervals along the way.
- *
+ * <p>
  * Example of showing a 30 second countdown in a text field:
- *
+ * <p>
  * <pre class="prettyprint">
  * new CountdownTimer(30000, 1000) {
- *
+ * <p>
  * public void onTick(long millisUntilFinished) {
  * mTextField.setText("seconds remaining: " + millisUntilFinished / 1000);
  * }
- *
+ * <p>
  * public void onFinish() {
  * mTextField.setText("done!");
  * }
  * }.start();
  * </pre>
- *
+ * <p>
  * The calls to {@link #onTick(long)} are synchronized to this object so that
  * one call to {@link #onTick(long)} won't ever occur before the previous
  * callback is complete.  This is only relevant when the implementation of
@@ -64,7 +64,8 @@ public abstract class CountDownTimer {
     // handles counting down
     private Handler mHandler = new Handler() {
 
-        @Override public void handleMessage(Message msg) {
+        @Override
+        public void handleMessage(Message msg) {
 
             synchronized (CountDownTimer.this) {
                 final long millisLeft = mStopTimeInFuture - SystemClock.elapsedRealtime();
@@ -92,11 +93,11 @@ public abstract class CountDownTimer {
     };
 
     /**
-     * @param millisInFuture The number of millis in the future from the call
-     * to {@link #start()} until the countdown is done and {@link #onFinish()}
-     * is called.
+     * @param millisInFuture    The number of millis in the future from the call
+     *                          to {@link #start()} until the countdown is done and {@link #onFinish()}
+     *                          is called.
      * @param countDownInterval The interval along the way to receive
-     * {@link #onTick(long)} callbacks.
+     *                          {@link #onTick(long)} callbacks.
      */
     public CountDownTimer(long millisInFuture, long countDownInterval) {
         mMillisInFuture = millisInFuture;

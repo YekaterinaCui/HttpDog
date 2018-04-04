@@ -6,6 +6,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,14 +16,18 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 /**
- * Desction:Apk工具
+ * 类名：ApkUtils
+ * 编辑时间：2018/4/4
+ * 编辑人：崔婧
+ * 简介：Apk工具
  */
 public class ApkUtils {
 
     /**
      * 安装一个apk文件
-     * @param context
-     * @param uriFile
+     *
+     * @param context 上下文
+     * @param uriFile 文件
      */
     public static void install(Context context, File uriFile) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -33,14 +38,15 @@ public class ApkUtils {
 
     /**
      * 卸载一个app
-     * @param context
-     * @param packageName
+     *
+     * @param context     上下文
+     * @param packageName 应用包名
      */
     public static void uninstall(Context context, String packageName) {
         //通过程序的包名创建URI
         Uri packageURI = Uri.parse("package:" + packageName);
         //创建Intent意图
-        Intent intent = new Intent(Intent.ACTION_DELETE,packageURI);
+        Intent intent = new Intent(Intent.ACTION_DELETE, packageURI);
         //执行卸载程序
         context.startActivity(intent);
     }
@@ -48,7 +54,7 @@ public class ApkUtils {
     /**
      * 检查手机上是否安装了指定的软件
      *
-     * @param context
+     * @param context     上下文
      * @param packageName 应用包名
      * @return
      */
@@ -72,8 +78,9 @@ public class ApkUtils {
 
     /**
      * 从apk中获取版本信息
-     * @param context
-     * @param channelPrefix
+     *
+     * @param context       上下文
+     * @param channelPrefix 版本
      * @return
      */
     public static String getChannelFromApk(Context context, String channelPrefix) {

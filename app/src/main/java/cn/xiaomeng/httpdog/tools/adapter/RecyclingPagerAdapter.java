@@ -8,9 +8,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 /**
- * Desction:
- * A {@link PagerAdapter} which behaves like an {@link android.widget.Adapter} with view types and
- * view recycling.
+ * 类名：RecyclingPagerAdapter
+ * 编辑时间：2018/4/4
+ * 编辑人：崔婧
+ * 简介：A {@link PagerAdapter} which behaves like an {@link android.widget.Adapter} with view types and view recycling.
  */
 public abstract class RecyclingPagerAdapter extends PagerAdapter {
     static final int IGNORE_ITEM_VIEW_TYPE = AdapterView.ITEM_VIEW_TYPE_IGNORE;
@@ -81,7 +82,7 @@ public abstract class RecyclingPagerAdapter extends PagerAdapter {
      * Get the type of View that will be created by {@link #getView} for the specified item.
      *
      * @param position The position of the item within the adapter's data set whose view type we
-     * want.
+     *                 want.
      * @return An integer representing the type of View. Two views should share the same type if one
      * can be converted to the other in {@link #getView}. Note: Integers must be in the
      * range 0 to {@link #getViewTypeCount} - 1. {@link #IGNORE_ITEM_VIEW_TYPE} can
@@ -100,15 +101,15 @@ public abstract class RecyclingPagerAdapter extends PagerAdapter {
      * {@link android.view.LayoutInflater#inflate(int, ViewGroup, boolean)}
      * to specify a root view and to prevent attachment to the root.
      *
-     * @param position The position of the item within the adapter's data set of the item whose view
-     * we want.
+     * @param position    The position of the item within the adapter's data set of the item whose view
+     *                    we want.
      * @param convertView The old view to reuse, if possible. Note: You should check that this view
-     * is non-null and of an appropriate type before using. If it is not possible to convert
-     * this view to display the correct data, this method can create a new view.
-     * Heterogeneous lists can specify their number of view types, so that this View is
-     * always of the right type (see {@link #getViewTypeCount()} and
-     * {@link #getItemViewType(int)}).
-     * @param container The parent that this view will eventually be attached to
+     *                    is non-null and of an appropriate type before using. If it is not possible to convert
+     *                    this view to display the correct data, this method can create a new view.
+     *                    Heterogeneous lists can specify their number of view types, so that this View is
+     *                    always of the right type (see {@link #getViewTypeCount()} and
+     *                    {@link #getItemViewType(int)}).
+     * @param container   The parent that this view will eventually be attached to
      * @return A View corresponding to the data at the specified position.
      */
     public abstract View getView(int position, View convertView, ViewGroup container);
@@ -133,7 +134,9 @@ public abstract class RecyclingPagerAdapter extends PagerAdapter {
         private View[] activeViews = new View[0];
         private int[] activeViewTypes = new int[0];
 
-        /** Unsorted views that can be used by the adapter as a convert view. */
+        /**
+         * Unsorted views that can be used by the adapter as a convert view.
+         */
         private SparseArray<View>[] scrapViews;
 
         private int viewTypeCount;
@@ -158,7 +161,9 @@ public abstract class RecyclingPagerAdapter extends PagerAdapter {
             return viewType >= 0;
         }
 
-        /** @return A view from the ScrapViews collection. These are unordered. */
+        /**
+         * @return A view from the ScrapViews collection. These are unordered.
+         */
         View getScrapView(int position, int viewType) {
             if (viewTypeCount == 1) {
                 return retrieveFromScrap(currentScrapViews, position);
@@ -185,7 +190,9 @@ public abstract class RecyclingPagerAdapter extends PagerAdapter {
             }
         }
 
-        /** Move all views remaining in activeViews to scrapViews. */
+        /**
+         * Move all views remaining in activeViews to scrapViews.
+         */
         void scrapActiveViews() {
             final View[] activeViews = this.activeViews;
             final int[] activeViewTypes = this.activeViewTypes;

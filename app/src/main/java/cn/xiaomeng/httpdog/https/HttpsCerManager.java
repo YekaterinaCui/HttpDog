@@ -39,7 +39,9 @@ public class HttpsCerManager {
     }
 
     private TrustManager[] prepareTrustManager(InputStream... certificates) {
-        if (certificates == null || certificates.length <= 0) { return null; }
+        if (certificates == null || certificates.length <= 0) {
+            return null;
+        }
         try {
 
             CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
@@ -50,7 +52,9 @@ public class HttpsCerManager {
                 String certificateAlias = Integer.toString(index++);
                 keyStore.setCertificateEntry(certificateAlias, certificateFactory.generateCertificate(certificate));
                 try {
-                    if (certificate != null) { certificate.close(); }
+                    if (certificate != null) {
+                        certificate.close();
+                    }
                 } catch (IOException e)
 
                 {
@@ -79,7 +83,9 @@ public class HttpsCerManager {
 
     private KeyManager[] prepareKeyManager(InputStream bksFile, String password) {
         try {
-            if (bksFile == null || password == null) { return null; }
+            if (bksFile == null || password == null) {
+                return null;
+            }
 
             KeyStore clientKeyStore = KeyStore.getInstance("BKS");
             clientKeyStore.load(bksFile, password.toCharArray());
@@ -108,7 +114,7 @@ public class HttpsCerManager {
             KeyManager[] keyManagers = prepareKeyManager(bksFile, password);
             SSLContext sslContext = SSLContext.getInstance("TLS");
 
-            sslContext.init(keyManagers, new TrustManager[] { new OkHttpTrustManager(chooseTrustManager(trustManagers)) }, new SecureRandom());
+            sslContext.init(keyManagers, new TrustManager[]{new OkHttpTrustManager(chooseTrustManager(trustManagers))}, new SecureRandom());
             okHttpBuilder.sslSocketFactory(sslContext.getSocketFactory());
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();

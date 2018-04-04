@@ -31,7 +31,7 @@ public class HttpDog {
                 .connectTimeout(timeout, TimeUnit.MILLISECONDS)
                 .writeTimeout(timeout, TimeUnit.MILLISECONDS)
                 .readTimeout(timeout, TimeUnit.MILLISECONDS);
-        if ( configuration.getHostnameVerifier() != null ) {
+        if (configuration.getHostnameVerifier() != null) {
             builder.hostnameVerifier(configuration.getHostnameVerifier());
         }
 
@@ -46,11 +46,11 @@ public class HttpDog {
             builder.cookieJar(cookieJar);
         }
 
-        if(configuration.getCache() != null) {
+        if (configuration.getCache() != null) {
             builder.cache(configuration.getCache());
         }
 
-        if (configuration.getAuthenticator() != null){
+        if (configuration.getAuthenticator() != null) {
             builder.authenticator(configuration.getAuthenticator());
         }
         if (configuration.getCertificatePinner() != null) {
@@ -58,10 +58,10 @@ public class HttpDog {
         }
         builder.followRedirects(configuration.isFollowRedirects());
         builder.followSslRedirects(configuration.isFollowSslRedirects());
-        if(configuration.getSslSocketFactory() != null) {
+        if (configuration.getSslSocketFactory() != null) {
             builder.sslSocketFactory(configuration.getSslSocketFactory());
         }
-        if(configuration.getDispatcher() != null) {
+        if (configuration.getDispatcher() != null) {
             builder.dispatcher(configuration.getDispatcher());
         }
         builder.retryOnConnectionFailure(configuration.isRetryOnConnectionFailure());
@@ -72,7 +72,7 @@ public class HttpDog {
             builder.interceptors().addAll(configuration.getInterceptorList());
         }
 
-        if(configuration.getProxy() != null){
+        if (configuration.getProxy() != null) {
             builder.proxy(configuration.getProxy());
         }
         Constants.DEBUG = configuration.isDebug();
@@ -90,15 +90,16 @@ public class HttpDog {
 
     /**
      * 修改公共请求参数信息
-     * @param key
-     * @param value
+     *
+     * @param key   参数名
+     * @param value 参数值
      */
     public void updateCommonParams(String key, String value) {
         boolean add = false;
         List<Part> commonParams = configuration.getCommonParams();
-        if (commonParams != null){
-            for (Part param:commonParams) {
-                if (param != null && TextUtils.equals(param.getKey(), key)){
+        if (commonParams != null) {
+            for (Part param : commonParams) {
+                if (param != null && TextUtils.equals(param.getKey(), key)) {
                     param.setValue(value);
                     add = true;
                     break;
@@ -112,12 +113,13 @@ public class HttpDog {
 
     /**
      * 修改公共header信息
-     * @param key
-     * @param value
+     *
+     * @param key   参数名
+     * @param value 参数值
      */
     public void updateCommonHeader(String key, String value) {
         Headers headers = configuration.getCommonHeaders();
-        if ( headers == null){
+        if (headers == null) {
             headers = new Headers.Builder().build();
         }
         configuration.commonHeaders = headers.newBuilder().set(key, value).build();

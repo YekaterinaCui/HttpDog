@@ -3,7 +3,7 @@ package cn.xiaomeng.httpdog;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
- class ClassTypeReflect {
+class ClassTypeReflect {
 
     static Type getModelClazz(Class<?> subclass) {
         return getGenericType(0, subclass);
@@ -16,7 +16,7 @@ import java.lang.reflect.Type;
         }
         Type[] params = ((ParameterizedType) superclass).getActualTypeArguments();
         if (index >= params.length || index < 0) {
-            throw new RuntimeException("Index outof bounds");
+            throw new RuntimeException("index out of bounds");
         }
 
         if (!(params[index] instanceof Class)) {

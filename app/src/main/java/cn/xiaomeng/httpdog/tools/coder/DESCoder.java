@@ -1,6 +1,7 @@
 package cn.xiaomeng.httpdog.tools.coder;
 
 import java.security.SecureRandom;
+
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
@@ -10,9 +11,10 @@ public class DESCoder {
 
     /**
      * 加密
-     * @param data
-     * @param password
-     * @return
+     *
+     * @param data     明文
+     * @param password 密码
+     * @return 字节
      */
     public static byte[] encrypt(byte[] data, String password) {
         try {
@@ -37,11 +39,12 @@ public class DESCoder {
 
     /**
      * DES
-     * @param src
-     * @param password
-     * @return
+     *
+     * @param src      明文
+     * @param password 密码
+     * @return 字节
      */
-    public static byte[] decrypt(byte []src, String password) {
+    public static byte[] decrypt(byte[] src, String password) {
         try {
             // DES算法要求有一个可信任的随机数源
             SecureRandom random = new SecureRandom();

@@ -14,30 +14,29 @@ import java.security.spec.RSAPublicKeySpec;
 import javax.crypto.Cipher;
 
 /**
- * Desction:RSA 工具类。提供加密，解密，生成密钥对等方法。
+ * 类名：RSACoder
+ * 编辑时间：2018/4/4
+ * 编辑人：崔婧
+ * 简介：RSA 工具类。提供加密，解密，生成密钥对等方法。
  */
 public class RSACoder {
-    /**
-     * 填充方式
-     */
-    public static enum PADDING { NoPadding, PKCS1Padding };
-    /**
-     * 算法
-     */
+
+    //填充方式
+    public static enum PADDING {
+        NoPadding, PKCS1Padding
+    }
+
+    //算法
     public static final String KEY_ALGORITHM = "RSA";
-    /**
-     * 算法/工作模式
-     */
+
+    //算法/工作模式
     public final static String CHIPER_ALGORITHM = "RSA/ECB/";
-    /**
-     * 密钥长度
-     */
+
+    //密钥长度
     public static final int KEY_SIZE = 1024;
 
-    /**
-     * 65537 or 0x010001
-     */
-    public static final byte[] PUBLIC_EXPONENT = { 1, 0, 1 };
+    //65537 or 0x010001
+    public static final byte[] PUBLIC_EXPONENT = {1, 0, 1};
 
     /**
      * 生成密钥对
@@ -59,9 +58,10 @@ public class RSACoder {
 
     /**
      * 生成公钥
-     * @param modulus
-     * @param publicExponent
-     * @return
+     *
+     * @param modulus        需加密迷行
+     * @param publicExponent 公共指数
+     * @return RSA公钥
      */
     private static RSAPublicKey generateRSAPublicKey(byte[] modulus, byte[] publicExponent) {
         try {
@@ -71,8 +71,8 @@ public class RSACoder {
             return (RSAPublicKey) keyFac.generatePublic(pubKeySpec);
         } catch (Exception e) {
             throw new RuntimeException(
-                    "Error when generate rsaPubblicKey, errmsg: "
-                            + e.getMessage(), e);
+                    "Error when generate rsaPubblicKey, error msg: " + e.getMessage(), e
+            );
         }
 
     }
@@ -80,9 +80,9 @@ public class RSACoder {
     /**
      * 生成私钥
      *
-     * @param modulus
-     * @param privateExponent
-     * @return RSAPrivateKey
+     * @param modulus         需加密模型
+     * @param privateExponent 私密指数
+     * @return RSA私钥
      */
     private static RSAPrivateKey generateRSAPrivateKey(byte[] modulus, byte[] privateExponent) {
         try {
@@ -93,23 +93,21 @@ public class RSACoder {
             return (RSAPrivateKey) keyFac.generatePrivate(priKeySpec);
         } catch (Exception e) {
             throw new RuntimeException(
-                    "Error when generate rsaPrivateKey, errmsg: "
-                            + e.getMessage(), e);
+                    "Error when generate rsaPrivateKey, error msg: " + e.getMessage(), e
+            );
         }
     }
 
     /**
      * 加密
      *
-     * @param key
-     *            加密的密钥
-     * @param data
-     *            待加密的明文数据
+     * @param key  加密的密钥
+     * @param data 待加密的明文数据
      * @return 加密后的数据
      */
     private static byte[] encrypt(Key key, byte[] data, PADDING padding) {
         try {
-            Cipher cipher = Cipher.getInstance(CHIPER_ALGORITHM+(padding==null? PADDING.NoPadding:padding));
+            Cipher cipher = Cipher.getInstance(CHIPER_ALGORITHM + (padding == null ? PADDING.NoPadding : padding));
             cipher.init(Cipher.ENCRYPT_MODE, key);
             return cipher.doFinal(data);
         } catch (Exception e) {
@@ -121,44 +119,42 @@ public class RSACoder {
     /**
      * 公钥加密
      *
-     * @param publicKey
-     * @param data
-     * @return
+     * @param publicKey 公钥
+     * @param data      待加密的明文数据
+     * @return 加密后的数据
      */
     public static byte[] encryptByPublicKey(byte[] publicKey, byte[] data, PADDING padding) {
         // 得到公钥
         RSAPublicKey key = generateRSAPublicKey(publicKey, PUBLIC_EXPONENT);
         // 加密
-        return encrypt(key, data,padding);
+        return encrypt(key, data, padding);
     }
 
     /**
      * 私钥加密
      *
-     * @param publicKey
-     * @param privateKey
-     * @param data
-     * @return
+     * @param publicKey  公钥
+     * @param privateKey 私钥
+     * @param data       待加密的明文
+     * @return 加密后的数据
      */
     public static byte[] encryptByPrivateKey(byte[] publicKey, byte[] privateKey, byte[] data, PADDING padding) {
         // 得到私钥
         RSAPrivateKey key = generateRSAPrivateKey(publicKey, privateKey);
         // 加密
-        return encrypt(key, data,padding);
+        return encrypt(key, data, padding);
     }
 
     /**
      * 解密
      *
-     * @param key
-     *            解密的密钥
-     * @param data
-     *            已经加密的数据
+     * @param key  解密的密钥
+     * @param data 已经加密的数据
      * @return 解密后的明文
      */
     private static byte[] decrypt(Key key, byte[] data, PADDING padding) {
         try {
-            Cipher cipher = Cipher.getInstance(CHIPER_ALGORITHM+(padding==null? PADDING.NoPadding:padding));
+            Cipher cipher = Cipher.getInstance(CHIPER_ALGORITHM + (padding == null ? PADDING.NoPadding : padding));
             cipher.init(Cipher.DECRYPT_MODE, key);
             return cipher.doFinal(data);
         } catch (Exception e) {
@@ -170,29 +166,29 @@ public class RSACoder {
     /**
      * 公钥解密
      *
-     * @param publicKey
-     * @param data
-     * @ret公钥urn
+     * @param publicKey 公钥
+     * @param data      待解密的密闻
+     * @return 明文
      */
     public static byte[] decryptByPublicKey(byte[] publicKey, byte[] data, PADDING padding) {
         // 得到公钥
         RSAPublicKey key = generateRSAPublicKey(publicKey, PUBLIC_EXPONENT);
         // 解密
-        return decrypt(key, data,padding);
+        return decrypt(key, data, padding);
     }
 
     /**
      * 私钥解密
      *
-     * @param publicKey
-     * @param privateKey
-     * @param data
-     * @return
+     * @param publicKey  公钥
+     * @param privateKey 私钥
+     * @param data       待解密的密闻
+     * @return 明文
      */
     public static byte[] decryptByPrivateKey(byte[] publicKey, byte[] privateKey, byte[] data, PADDING padding) {
         // 得到私钥
         RSAPrivateKey key = generateRSAPrivateKey(publicKey, privateKey);
         // 解密
-        return decrypt(key, data,padding);
+        return decrypt(key, data, padding);
     }
 }

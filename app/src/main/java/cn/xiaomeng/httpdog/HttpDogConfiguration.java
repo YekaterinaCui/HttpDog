@@ -26,7 +26,7 @@ public class HttpDogConfiguration {
     protected Headers commonHeaders;
     private List<InputStream> certificateList;
     private HostnameVerifier hostnameVerifier;
-    private long timeout = cn.xiaomeng.httpdog.Constants.REQ_TIMEOUT;
+    private long timeout;
     private boolean debug;
     private CookieJar cookieJar;
     private Cache cache;
@@ -84,6 +84,7 @@ public class HttpDogConfiguration {
 
         public Builder() {
             certificateList = new ArrayList<>();
+            timeout = Constants.REQ_TIMEOUT;
             followSslRedirects = true;
             followRedirects = true;
             retryOnConnectionFailure = true;
@@ -92,18 +93,20 @@ public class HttpDogConfiguration {
 
         /**
          * 添加公共参数
-         * @param params
-         * @return
+         *
+         * @param params 参数
+         * @return 构造器
          */
-        public Builder setCommenParams(List<Part> params){
+        public Builder setCommenParams(List<Part> params) {
             this.commonParams = params;
             return this;
         }
 
         /**
          * 公共header
-         * @param headers
-         * @return
+         *
+         * @param headers 请求头
+         * @return 构造器
          */
         public Builder setCommenHeaders(Headers headers) {
             commonHeaders = headers;
@@ -112,12 +115,13 @@ public class HttpDogConfiguration {
 
         /**
          * 指定证书
-         * @param certificates
-         * @return
+         *
+         * @param certificates 证书
+         * @return 构造器
          */
         public Builder setCertificates(InputStream... certificates) {
-            for(InputStream inputStream:certificates) {
-                if ( inputStream != null ) {
+            for (InputStream inputStream : certificates) {
+                if (inputStream != null) {
                     certificateList.add(inputStream);
                 }
             }
@@ -125,7 +129,7 @@ public class HttpDogConfiguration {
         }
 
         public Builder setCertificates(String... certificates) {
-            for(String certificate:certificates) {
+            for (String certificate : certificates) {
                 if (!StringUtils.isEmpty(certificate)) {
                     certificateList.add(new Buffer()
                             .writeUtf8(certificate)
@@ -147,8 +151,9 @@ public class HttpDogConfiguration {
 
         /**
          * 设置调试开关
-         * @param debug
-         * @return
+         *
+         * @param debug 是否是调试模式
+         * @return 构造器
          */
         public Builder setDebug(boolean debug) {
             this.debug = debug;
@@ -157,8 +162,9 @@ public class HttpDogConfiguration {
 
         /**
          * 设置timeout
-         * @param timeout
-         * @return
+         *
+         * @param timeout 请求超时时间
+         * @return 构造器
          */
         public Builder setTimeout(long timeout) {
             this.timeout = timeout;
@@ -167,8 +173,9 @@ public class HttpDogConfiguration {
 
         /**
          * 设置cookie jar
-         * @param cookieJar
-         * @return
+         *
+         * @param cookieJar cookie
+         * @return 构造器
          */
         public Builder setCookieJar(CookieJar cookieJar) {
             this.cookieJar = cookieJar;
@@ -177,8 +184,9 @@ public class HttpDogConfiguration {
 
         /**
          * 设置缓存
-         * @param cache
-         * @return
+         *
+         * @param cache 缓存
+         * @return 构造器
          */
         public Builder setCache(Cache cache) {
             this.cache = cache;
@@ -188,9 +196,10 @@ public class HttpDogConfiguration {
         /**
          * 设置缓存-并且添加网络拦截器修改响应头(有无网络都先读缓存)
          * 强制响应缓存者根据该值校验新鲜性.即与自身的Age值,与请求时间做比较.如果超出max-age值,则强制去服务器端验证.以确保返回一个新鲜的响应.
-         * @param cache
+         *
+         * @param cache     缓存
          * @param cacheTime 缓存时间 单位秒
-         * @return
+         * @return 构造器
          */
         public Builder setCacheAge(Cache cache, final int cacheTime) {
             setCache(cache, String.format("max-age=%d", cacheTime));
@@ -201,9 +210,10 @@ public class HttpDogConfiguration {
         /**
          * 设置缓存-并且添加网络拦截器修改响应头(有无网络都先读缓存)
          * 允许缓存者发送一个过期不超过指定秒数的陈旧的缓存.
-         * @param cache
+         *
+         * @param cache     缓存
          * @param cacheTime 缓存时间 单位秒
-         * @return
+         * @return 构造器
          */
         public Builder setCacheStale(Cache cache, final int cacheTime) {
             setCache(cache, String.format("max-stale=%d", cacheTime));
@@ -212,9 +222,10 @@ public class HttpDogConfiguration {
 
         /**
          * 设置缓存-并且添加网络拦截器修改响应头(有无网络都先读缓存)
-         * @param cache
+         *
+         * @param cache             缓存
          * @param cacheControlValue Cache-Control值
-         * @return
+         * @return 构造器
          */
         public Builder setCache(Cache cache, final String cacheControlValue) {
             Interceptor REWRITE_CACHE_CONTROL_INTERCEPTOR = new Interceptor() {
@@ -234,8 +245,9 @@ public class HttpDogConfiguration {
 
         /**
          * 设置Authenticator
-         * @param authenticator
-         * @return
+         *
+         * @param authenticator 授权
+         * @return 构造器
          */
         public Builder setAuthenticator(Authenticator authenticator) {
             this.authenticator = authenticator;
@@ -264,8 +276,9 @@ public class HttpDogConfiguration {
 
         /**
          * 设置网络拦截器
-         * @param interceptors
-         * @return
+         *
+         * @param interceptors 拦截器
+         * @return 构造器
          */
         public Builder setNetworkInterceptors(List<Interceptor> interceptors) {
             if (interceptors != null) {
@@ -276,8 +289,9 @@ public class HttpDogConfiguration {
 
         /**
          * 设置应用拦截器
-         * @param interceptors
-         * @return
+         *
+         * @param interceptors 拦截器
+         * @return 构造器
          */
         public Builder setInterceptors(List<Interceptor> interceptors) {
             this.interceptorList = interceptors;
@@ -286,8 +300,9 @@ public class HttpDogConfiguration {
 
         /**
          * 设置SSLSocketFactory实例
-         * @param sslSocketFactory
-         * @return
+         *
+         * @param sslSocketFactory SSL
+         * @return 构造器
          */
         public Builder setSSLSocketFactory(SSLSocketFactory sslSocketFactory) {
             this.sslSocketFactory = sslSocketFactory;
@@ -296,8 +311,9 @@ public class HttpDogConfiguration {
 
         /**
          * 设置Dispatcher实例
-         * @param dispatcher
-         * @return
+         *
+         * @param dispatcher dispatcher
+         * @return 构造器
          */
         public Builder setDispatcher(Dispatcher dispatcher) {
             this.dispatcher = dispatcher;

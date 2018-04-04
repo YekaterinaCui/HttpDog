@@ -8,7 +8,10 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Desction:日期时间工具类
+ * 类名：DateUtils
+ * 编辑时间：2018/4/4
+ * 编辑人：崔婧
+ * 简介：日期时间工具类
  */
 public class DateUtils {
 
@@ -18,10 +21,9 @@ public class DateUtils {
 
     /**
      * 功能描述：格式化日期
-     * @param dateStr
-     *            String 字符型日期
-     * @param format
-     *            String 格式
+     *
+     * @param dateStr String 字符型日期
+     * @param format  String 格式
      * @return Date 日期
      */
     public static Date parseDate(String dateStr, String format) {
@@ -41,8 +43,7 @@ public class DateUtils {
     /**
      * 功能描述：格式化日期
      *
-     * @param dateStr
-     *            String 字符型日期：YYYY-MM-DD 格式
+     * @param dateStr String 字符型日期：YYYY-MM-DD 格式
      * @return Date
      */
     public static Date parseDate(String dateStr) {
@@ -52,10 +53,8 @@ public class DateUtils {
     /**
      * 功能描述：格式化输出日期
      *
-     * @param date
-     *            Date 日期
-     * @param format
-     *            String 格式
+     * @param date   Date 日期
+     * @param format String 格式
      * @return 返回字符型日期
      */
     public static String format(Date date, String format) {
@@ -73,8 +72,7 @@ public class DateUtils {
     /**
      * 功能描述：
      *
-     * @param date
-     *            Date 日期
+     * @param date Date 日期
      * @return
      */
     public static String format(Date date) {
@@ -84,8 +82,7 @@ public class DateUtils {
     /**
      * 功能描述：返回年份
      *
-     * @param date
-     *            Date 日期
+     * @param date Date 日期
      * @return 返回年份
      */
     public static int getYear(Date date) {
@@ -97,8 +94,7 @@ public class DateUtils {
     /**
      * 功能描述：返回月份
      *
-     * @param date
-     *            Date 日期
+     * @param date Date 日期
      * @return 返回月份
      */
     public static int getMonth(Date date) {
@@ -110,8 +106,7 @@ public class DateUtils {
     /**
      * 功能描述：返回日份
      *
-     * @param date
-     *            Date 日期
+     * @param date Date 日期
      * @return 返回日份
      */
     public static int getDay(Date date) {
@@ -123,8 +118,7 @@ public class DateUtils {
     /**
      * 功能描述：返回小时
      *
-     * @param date
-     *            日期
+     * @param date 日期
      * @return 返回小时
      */
     public static int getHour(Date date) {
@@ -136,8 +130,7 @@ public class DateUtils {
     /**
      * 功能描述：返回分钟
      *
-     * @param date
-     *            日期
+     * @param date 日期
      * @return 返回分钟
      */
     public static int getMinute(Date date) {
@@ -149,8 +142,7 @@ public class DateUtils {
     /**
      * 返回秒钟
      *
-     * @param date
-     *            Date 日期
+     * @param date Date 日期
      * @return 返回秒钟
      */
     public static int getSecond(Date date) {
@@ -162,8 +154,7 @@ public class DateUtils {
     /**
      * 功能描述：返回毫秒
      *
-     * @param date
-     *            日期
+     * @param date 日期
      * @return 返回毫秒
      */
     public static long getMillis(Date date) {
@@ -175,8 +166,7 @@ public class DateUtils {
     /**
      * 功能描述：返回字符型日期
      *
-     * @param date
-     *            日期
+     * @param date 日期
      * @return 返回字符型日期 yyyy/MM/dd 格式
      */
     public static String getDate(Date date) {
@@ -186,8 +176,7 @@ public class DateUtils {
     /**
      * 功能描述：返回字符型时间
      *
-     * @param date
-     *            Date 日期
+     * @param date Date 日期
      * @return 返回字符型时间 HH:mm:ss 格式
      */
     public static String getTime(Date date) {
@@ -197,8 +186,7 @@ public class DateUtils {
     /**
      * 功能描述：返回字符型日期时间
      *
-     * @param date
-     *            Date 日期
+     * @param date Date 日期
      * @return 返回字符型日期时间 yyyy/MM/dd HH:mm:ss 格式
      */
     public static String getDateTime(Date date) {
@@ -208,10 +196,8 @@ public class DateUtils {
     /**
      * 功能描述：日期相加
      *
-     * @param date
-     *            Date 日期
-     * @param day
-     *            int 天数
+     * @param date Date 日期
+     * @param day  int 天数
      * @return 返回相加后的日期
      */
     public static Date addDate(Date date, int day) {
@@ -224,10 +210,8 @@ public class DateUtils {
     /**
      * 功能描述：日期相减
      *
-     * @param date
-     *            Date 日期
-     * @param date1
-     *            Date 日期
+     * @param date  Date 日期
+     * @param date1 Date 日期
      * @return 返回相减后的日期
      */
     public static int diffDate(Date date, Date date1) {
@@ -237,8 +221,7 @@ public class DateUtils {
     /**
      * 功能描述：取得指定月份的第一天
      *
-     * @param strdate
-     *            String 字符型日期
+     * @param strdate String 字符型日期
      * @return String yyyy-MM-dd 格式
      */
     public static String getMonthBegin(String strdate) {
@@ -249,8 +232,7 @@ public class DateUtils {
     /**
      * 功能描述：取得指定月份的最后一天
      *
-     * @param strdate
-     *            String 字符型日期
+     * @param strdate String 字符型日期
      * @return String 日期字符串 yyyy-MM-dd格式
      */
     public static String getMonthEnd(String strdate) {
@@ -265,8 +247,7 @@ public class DateUtils {
     /**
      * 功能描述：常用的格式化日期
      *
-     * @param date
-     *            Date 日期
+     * @param date Date 日期
      * @return String 日期字符串 yyyy-MM-dd格式
      */
     public static String formatDate(Date date) {
@@ -276,10 +257,8 @@ public class DateUtils {
     /**
      * 功能描述：以指定的格式来格式化日期
      *
-     * @param date
-     *            Date 日期
-     * @param format
-     *            String 格式
+     * @param date   Date 日期
+     * @param format String 格式
      * @return String 日期字符串
      */
     public static String formatDateByFormat(Date date, String format) {
@@ -297,6 +276,7 @@ public class DateUtils {
 
     /**
      * 获取某天是星期几
+     *
      * @param date
      * @return
      */
@@ -341,13 +321,13 @@ public class DateUtils {
                 break;
         }
 
-        return month + "月" + day + "日"  + "(" + weekStr + ")";
+        return month + "月" + day + "日" + "(" + weekStr + ")";
     }
 
     /**
      * 日期字符串转换为日期
      *
-     * @param date 日期字符串
+     * @param date    日期字符串
      * @param pattern 格式
      * @return 日期
      */
@@ -379,7 +359,7 @@ public class DateUtils {
         int nowMinute = now.get(Calendar.MINUTE);
 
         Calendar ca = Calendar.getInstance();
-        if(date!=null)
+        if (date != null)
             ca.setTime(date);
         else
             ca.setTime(new Date());
@@ -437,7 +417,7 @@ public class DateUtils {
     /**
      * 日期字符串转换为日期
      *
-     * @param date 日期字符串
+     * @param date    日期字符串
      * @param pattern 格式
      * @return 日期
      */
@@ -450,14 +430,15 @@ public class DateUtils {
 
     /**
      * 字符串转换成日期.
+     *
      * @param dateString 日期字符
-     * @param pattern 格式化.
+     * @param pattern    格式化.
      * @return
      */
-    public static Date parseToDate(String dateString,String pattern){
+    public static Date parseToDate(String dateString, String pattern) {
 
-        if(pattern==null || "".equals(pattern)){
-            pattern="yyyy-MM-dd HH:mm:ss";
+        if (pattern == null || "".equals(pattern)) {
+            pattern = "yyyy-MM-dd HH:mm:ss";
         }
 
         SimpleDateFormat formatter = new SimpleDateFormat(pattern, Locale.getDefault());
@@ -469,7 +450,7 @@ public class DateUtils {
         return new Date();
     }
 
-    public static String getTimeInterval(Date d){
+    public static String getTimeInterval(Date d) {
         String date = format(d, "yyyy-MM-dd HH:mm:ss");
         return getTimeInterval(date);
     }

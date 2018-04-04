@@ -14,7 +14,7 @@ import java.io.InputStream;
  * @since 1.4
  */
 public class ClosedInputStream extends InputStream {
-    
+
     /**
      * A singleton.
      */

@@ -21,9 +21,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Desction:crash收集
+ * 类名：CrashHandler
+ * 编辑时间：2018/4/4
+ * 编辑人：崔婧
+ * 简介：crash收集
  */
-public class CrashHandler implements Thread.UncaughtExceptionHandler{
+public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
     private Thread.UncaughtExceptionHandler mDefaultHandler;// 系统默认的UncaughtException处理类
     private final static CrashHandler INSTANCE = new CrashHandler();// CrashHandler实例
@@ -42,11 +45,13 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler{
     /**
      * 保证只有一个CrashHandler实例
      */
-    private CrashHandler() {}
+    private CrashHandler() {
+    }
 
     /**
      * 获取CrashHandler实例 ,单例模式
-     * @return
+     *
+     * @return 崩溃处理助手
      */
     public static CrashHandler getInstance() {
         return INSTANCE;
@@ -56,8 +61,9 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler{
      * 初始化
      * 获取系统默认的UncaughtException处理器,
      * 设置该CrashHandler为程序的默认处理器
-     * @param context
-     * @return
+     *
+     * @param context 上下文
+     * @return 崩溃处理助手
      */
     public CrashHandler init(Context context) {
         mContext = context;
@@ -112,14 +118,14 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler{
         new Thread() {
             public void run() {
                 Looper.prepare();
-                if(mOnCrashListener != null) {
+                if (mOnCrashListener != null) {
                     mOnCrashListener.onCrash(mContext, crashMsg);
                 }
                 Looper.loop();
             }
         }.start();
 
-        if ( mCrashSave ) {
+        if (mCrashSave) {
             // 收集设备参数信息
             collectDeviceInfo(mContext);
             // 保存日志文件
@@ -130,8 +136,9 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler{
 
     /**
      * 设置Crash事件回调
-     * @param listener
-     * @return
+     *
+     * @param listener 崩溃回调
+     * @return 崩溃处理助手
      */
     public CrashHandler setOnCrashListener(OnCrashListener listener) {
         this.mOnCrashListener = listener;
@@ -140,18 +147,20 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler{
 
     /**
      * 设置是否保存crash
-     * @param isSave
-     * @return
+     *
+     * @param isSave 是否保存
+     * @return 崩溃处理助手
      */
     public CrashHandler setCrashSave(boolean isSave) {
-        this.mCrashSave  = isSave;
+        this.mCrashSave = isSave;
         return this;
     }
 
     /**
      * 自定义crash保存目标文件夹
-     * @param targetFolder
-     * @return
+     *
+     * @param targetFolder 目标文件夹
+     * @return 崩溃处理助手
      */
     public CrashHandler setCrashSaveTargetFolder(String targetFolder) {
         this.mCrashSaveTargetFolder = targetFolder;
@@ -161,7 +170,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler{
     /**
      * 收集设备参数信息
      *
-     * @param context
+     * @param context 上下文
      */
     private void collectDeviceInfo(Context context) {
         try {
@@ -194,8 +203,9 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler{
 
     /**
      * 保存crash信息
-     * @param crashMsg
-     * @return
+     *
+     * @param crashMsg 崩溃信息
+     * @return 路径
      */
     private String saveCrashInfo2File(String crashMsg) {
         StringBuffer sb = new StringBuffer();
@@ -215,7 +225,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler{
                 Environment.MEDIA_MOUNTED)) {
             try {
                 File dir;
-                if( StringUtils.isEmpty(mCrashSaveTargetFolder) ) {
+                if (StringUtils.isEmpty(mCrashSaveTargetFolder)) {
                     dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "crash");
                 } else {
                     dir = new File(mCrashSaveTargetFolder);
@@ -237,7 +247,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler{
         return null;
     }
 
-    public interface OnCrashListener{
+    public interface OnCrashListener {
         void onCrash(Context context, String errorMsg);
     }
 }

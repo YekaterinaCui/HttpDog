@@ -15,7 +15,7 @@ public abstract class ViewHolderAdapter<VH extends ViewHolderAdapter.ViewHolder,
 
     public ViewHolderAdapter(Context context, List<T> list) {
         this.mContext = context;
-        this.mList= list;
+        this.mList = list;
         this.mInflater = LayoutInflater.from(mContext);
     }
 
@@ -37,7 +37,7 @@ public abstract class ViewHolderAdapter<VH extends ViewHolderAdapter.ViewHolder,
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         VH holder;
-        if ( view == null ) {
+        if (view == null) {
             holder = onCreateViewHolder(viewGroup, i);
             holder.view.setTag(holder);
         } else {
@@ -49,6 +49,7 @@ public abstract class ViewHolderAdapter<VH extends ViewHolderAdapter.ViewHolder,
     }
 
     public abstract VH onCreateViewHolder(ViewGroup parent, int position);
+
     public abstract void onBindViewHolder(VH holder, int position);
 
     public View inflate(int resLayout, ViewGroup parent) {
@@ -57,7 +58,8 @@ public abstract class ViewHolderAdapter<VH extends ViewHolderAdapter.ViewHolder,
 
     /**
      * 返回列表数据
-     * @return
+     *
+     * @return 返回列表数据
      */
     public List<T> getDatas() {
         return this.mList;
@@ -67,12 +69,13 @@ public abstract class ViewHolderAdapter<VH extends ViewHolderAdapter.ViewHolder,
         return this.mContext;
     }
 
-    public LayoutInflater getLayoutInflater(){
+    public LayoutInflater getLayoutInflater() {
         return this.mInflater;
     }
 
     public static class ViewHolder {
         View view;
+
         public ViewHolder(View view) {
             this.view = view;
         }

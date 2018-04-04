@@ -22,7 +22,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-class OkHttpTask implements Callback, ProgressCallback{
+class OkHttpTask implements Callback, ProgressCallback {
 
     private Handler handler = new Handler(Looper.getMainLooper());
     public static final String DEFAULT_HTTP_TASK_KEY = "default_http_task_key";
@@ -32,10 +32,10 @@ class OkHttpTask implements Callback, ProgressCallback{
     private BaseHttpRequestCallback callback;
     private Headers headers;
     private String requestKey;
-    private cn.xiaomeng.httpdog.Method method;
+    private Method method;
     private OkHttpClient okHttpClient;
 
-    public OkHttpTask(cn.xiaomeng.httpdog.Method method, String url, RequestParams params, OkHttpClient.Builder builder, BaseHttpRequestCallback callback) {
+    public OkHttpTask(Method method, String url, RequestParams params, OkHttpClient.Builder builder, BaseHttpRequestCallback callback) {
         this.method = method;
         this.url = url;
         this.callback = callback;
@@ -74,40 +74,40 @@ class OkHttpTask implements Callback, ProgressCallback{
         }
     }
 
-    protected void run() throws Exception{
+    protected void run() throws Exception {
         String srcUrl = url;
         //构建请求Request实例
         Request.Builder builder = new Request.Builder();
 
         switch (method) {
             case GET:
-                url = cn.xiaomeng.httpdog.Utils.getFullUrl(url, params.getFormParams(), params.isUrlEncoder());
+                url = Utils.getFullUrl(url, params.getFormParams(), params.isUrlEncoder());
                 builder.get();
                 break;
             case DELETE:
-                url = cn.xiaomeng.httpdog.Utils.getFullUrl(url, params.getFormParams(), params.isUrlEncoder());
+                url = Utils.getFullUrl(url, params.getFormParams(), params.isUrlEncoder());
                 builder.delete();
                 break;
             case HEAD:
-                url = cn.xiaomeng.httpdog.Utils.getFullUrl(url, params.getFormParams(), params.isUrlEncoder());
+                url = Utils.getFullUrl(url, params.getFormParams(), params.isUrlEncoder());
                 builder.head();
                 break;
             case POST:
                 RequestBody body = params.getRequestBody();
                 if (body != null) {
-                    builder.post(new cn.xiaomeng.httpdog.ProgressRequestBody(body, this));
+                    builder.post(new ProgressRequestBody(body, this));
                 }
                 break;
             case PUT:
                 RequestBody bodyPut = params.getRequestBody();
                 if (bodyPut != null) {
-                    builder.put(new cn.xiaomeng.httpdog.ProgressRequestBody(bodyPut, this));
+                    builder.put(new ProgressRequestBody(bodyPut, this));
                 }
                 break;
             case PATCH:
                 RequestBody bodyPatch = params.getRequestBody();
                 if (bodyPatch != null) {
-                    builder.put(new cn.xiaomeng.httpdog.ProgressRequestBody(bodyPatch, this));
+                    builder.put(new ProgressRequestBody(bodyPatch, this));
                 }
                 break;
         }
@@ -117,7 +117,7 @@ class OkHttpTask implements Callback, ProgressCallback{
         builder.url(url).tag(srcUrl).headers(headers);
         Request request = builder.build();
         Call call = okHttpClient.newCall(request);
-        cn.xiaomeng.httpdog.OkHttpCallManager.getInstance().addCall(url, call);
+        OkHttpCallManager.getInstance().addCall(url, call);
         //执行请求
         call.enqueue(this);
     }
@@ -146,7 +146,7 @@ class OkHttpTask implements Callback, ProgressCallback{
         ResponseData responseData = new ResponseData();
         if (e instanceof SocketTimeoutException) {
             responseData.setTimeout(true);
-        //} else if (e instanceof InterruptedIOException && TextUtils.equals(e.getMessage(), "timeout")) {
+            //} else if (e instanceof InterruptedIOException && TextUtils.equals(e.getMessage(), "timeout")) {
         } else if (e instanceof InterruptedIOException && TextUtils.equals(e.getMessage(), "超时")) {
             responseData.setTimeout(true);
         }
@@ -179,7 +179,7 @@ class OkHttpTask implements Callback, ProgressCallback{
         } else {
             responseData.setResponseNull(true);
             responseData.setCode(BaseHttpRequestCallback.ERROR_RESPONSE_UNKNOWN);
-            if(responseData.isTimeout()) {
+            if (responseData.isTimeout()) {
                 //responseData.setMessage("request timeout");
                 responseData.setMessage("请求超时");
             } else {
@@ -199,7 +199,7 @@ class OkHttpTask implements Callback, ProgressCallback{
     }
 
     protected void onPostExecute(ResponseData responseData) {
-        cn.xiaomeng.httpdog.OkHttpCallManager.getInstance().removeCall(url);
+        OkHttpCallManager.getInstance().removeCall(url);
         //判断请求是否在这个集合中
         if (!HttpTaskHandler.getInstance().contains(requestKey)) {
             return;
@@ -217,7 +217,7 @@ class OkHttpTask implements Callback, ProgressCallback{
         if (!responseData.isResponseNull()) {//请求得到响应
             if (responseData.isSuccess()) {//成功的请求
                 String respBody = responseData.getResponse();
-                if (cn.xiaomeng.httpdog.Constants.DEBUG) {
+                if (Constants.DEBUG) {
                     Headers headers = responseData.getHeaders();
                     String respHeader = "";
                     if (headers != null) {

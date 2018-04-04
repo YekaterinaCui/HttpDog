@@ -11,9 +11,13 @@ import okio.Okio;
 import okio.Sink;
 
 /**
- * Desction:包装的请求体，处理进度
+ * 类名：ProgressRequestBody
+ * 编辑时间：2018/4/4
+ * 编辑人：崔婧
+ * 简介：包装的请求体，处理进度
  */
 class ProgressRequestBody extends RequestBody {
+
     //开始时间，用户计算加载速度
     private long previousTime;
 

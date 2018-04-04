@@ -15,7 +15,7 @@ import okhttp3.Response;
 class FileDownloadTask extends AsyncTask<Void, Long, Boolean> {
 
     private OkHttpClient okHttpClient;
-    private cn.xiaomeng.httpdog.FileDownloadCallback callback;
+    private FileDownloadCallback callback;
     private String url;
     private File target;
     //开始下载时间，用户计算加载速度
@@ -74,8 +74,8 @@ class FileDownloadTask extends AsyncTask<Void, Long, Boolean> {
 
             int progress = (int) (sum * 100.0f / total);
             //计算下载速度
-            long totalTime = (System.currentTimeMillis() - previousTime)/1000;
-            if ( totalTime == 0 ) {
+            long totalTime = (System.currentTimeMillis() - previousTime) / 1000;
+            if (totalTime == 0) {
                 totalTime += 1;
             }
             long networkSpeed = sum / totalTime;
@@ -87,11 +87,11 @@ class FileDownloadTask extends AsyncTask<Void, Long, Boolean> {
     protected void onPostExecute(Boolean suc) {
         super.onPostExecute(suc);
         if (suc) {
-            if ( callback != null ) {
+            if (callback != null) {
                 callback.onDone();
             }
         } else {
-            if ( callback != null ) {
+            if (callback != null) {
                 callback.onFailure();
             }
         }
@@ -123,11 +123,15 @@ class FileDownloadTask extends AsyncTask<Void, Long, Boolean> {
             return target.getAbsolutePath();
         } finally {
             try {
-                if (is != null) { is.close(); }
+                if (is != null) {
+                    is.close();
+                }
             } catch (IOException e) {
             }
             try {
-                if (fos != null) { fos.close(); }
+                if (fos != null) {
+                    fos.close();
+                }
             } catch (IOException e) {
             }
         }

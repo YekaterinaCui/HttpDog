@@ -4,7 +4,10 @@ import okhttp3.Headers;
 import okhttp3.Response;
 
 /**
- * Desction:Http响应内容
+ * 类名：ResponseData
+ * 编辑时间：2018/4/4
+ * 编辑人：崔婧
+ * 简介：Http响应内容
  */
 class ResponseData {
 

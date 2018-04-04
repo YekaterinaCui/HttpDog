@@ -8,15 +8,15 @@ import okhttp3.Call;
 class OkHttpCallManager {
 
     private ConcurrentHashMap<String, Call> callMap;
-    private static cn.xiaomeng.httpdog.OkHttpCallManager manager;
+    private static OkHttpCallManager manager;
 
     private OkHttpCallManager() {
         callMap = new ConcurrentHashMap<>();
     }
 
-    public static cn.xiaomeng.httpdog.OkHttpCallManager getInstance() {
+    public static OkHttpCallManager getInstance() {
         if (manager == null) {
-            manager = new cn.xiaomeng.httpdog.OkHttpCallManager();
+            manager = new OkHttpCallManager();
         }
         return manager;
     }
@@ -28,7 +28,7 @@ class OkHttpCallManager {
     }
 
     public Call getCall(String url) {
-        if ( !StringUtils.isEmpty(url) ) {
+        if (!StringUtils.isEmpty(url)) {
             return callMap.get(url);
         }
 
@@ -36,7 +36,7 @@ class OkHttpCallManager {
     }
 
     public void removeCall(String url) {
-        if ( !StringUtils.isEmpty(url) ) {
+        if (!StringUtils.isEmpty(url)) {
             callMap.remove(url);
         }
     }

@@ -17,7 +17,10 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 /**
- * Desction:Http请求参数类
+ * 类名：RequestParams
+ * 编辑时间：2018/4/4
+ * 编辑人：崔婧
+ * 简介：Http请求参数类
  */
 public class RequestParams {
 
@@ -25,13 +28,14 @@ public class RequestParams {
     private final List<Part> params = new ArrayList<>();
     private final List<Part> files = new ArrayList<>();
 
-    protected cn.xiaomeng.httpdog.HttpCycleContext httpCycleContext;
+    protected HttpCycleContext httpCycleContext;
     private String httpTaskKey;
     private RequestBody requestBody;
     private boolean applicationJson;
     private boolean urlEncoder;//是否进行URL编码
     private JSONObject jsonParams;
     protected CacheControl cacheControl;
+
     public RequestParams() {
         this(null);
     }
@@ -45,13 +49,13 @@ public class RequestParams {
         headers.add("charset", "UTF-8");
 
         List<Part> commonParams = HttpDog.getInstance().getCommonParams();
-        if (commonParams != null && commonParams.size() > 0){
+        if (commonParams != null && commonParams.size() > 0) {
             params.addAll(commonParams);
         }
 
         //添加公共header
         Headers commonHeaders = HttpDog.getInstance().getCommonHeaders();
-        if ( commonHeaders != null && commonHeaders.size() > 0 ) {
+        if (commonHeaders != null && commonHeaders.size() > 0) {
             for (int i = 0; i < commonHeaders.size(); i++) {
                 String key = commonHeaders.name(i);
                 String value = commonHeaders.value(i);
@@ -59,7 +63,7 @@ public class RequestParams {
             }
         }
 
-        if ( httpCycleContext != null ) {
+        if (httpCycleContext != null) {
             httpTaskKey = httpCycleContext.getHttpTaskKey();
         }
     }
@@ -75,7 +79,7 @@ public class RequestParams {
      * @param value
      */
     public void addFormDataPart(String key, String value) {
-        if ( value == null ) {
+        if (value == null) {
             value = "";
         }
 
@@ -106,8 +110,10 @@ public class RequestParams {
     }
 
     /**
-     * @param key
-     * @param file
+     * 添加表单数据
+     *
+     * @param key  表单名
+     * @param file 表单
      */
     public void addFormDataPart(String key, File file) {
         if (file == null || !file.exists() || file.length() == 0) {
@@ -121,7 +127,7 @@ public class RequestParams {
         }
 
         boolean isJpg = file.getName().lastIndexOf("jpg") > 0 || file.getName().lastIndexOf("JPG") > 0
-                ||file.getName().lastIndexOf("jpeg") > 0 || file.getName().lastIndexOf("JPEG") > 0;
+                || file.getName().lastIndexOf("jpeg") > 0 || file.getName().lastIndexOf("JPEG") > 0;
         if (isJpg) {
             addFormDataPart(key, file, "image/jpeg; charset=UTF-8");
             return;
@@ -140,7 +146,7 @@ public class RequestParams {
         MediaType mediaType = null;
         try {
             mediaType = MediaType.parse(contentType);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -157,7 +163,7 @@ public class RequestParams {
 
 
     public void addFormDataPartFiles(String key, List<File> files) {
-        for (File file:files){
+        for (File file : files) {
             if (file == null || !file.exists() || file.length() == 0) {
                 continue;
             }
@@ -166,7 +172,7 @@ public class RequestParams {
     }
 
     public void addFormDataPart(String key, List<File> files, MediaType mediaType) {
-        for (File file:files){
+        for (File file : files) {
             if (file == null || !file.exists() || file.length() == 0) {
                 continue;
             }
@@ -185,7 +191,7 @@ public class RequestParams {
     }
 
     public void addFormDataPart(String key, List<FileWrapper> fileWrappers) {
-        for (FileWrapper fileWrapper:fileWrappers){
+        for (FileWrapper fileWrapper : fileWrappers) {
             addFormDataPart(key, fileWrapper);
         }
     }
@@ -200,7 +206,7 @@ public class RequestParams {
     }
 
     public void addHeader(String key, String value) {
-        if ( value == null ) {
+        if (value == null) {
             value = "";
         }
 
@@ -251,9 +257,10 @@ public class RequestParams {
 
     /**
      * 设置application/json方式传递数据
+     *
      * @param jsonParams 请求的JSON实例
      */
-    public void applicationJson(JSONObject jsonParams){
+    public void applicationJson(JSONObject jsonParams) {
         applicationJson = true;
         this.jsonParams = jsonParams;
     }
@@ -302,14 +309,14 @@ public class RequestParams {
             boolean hasData = false;
             MultipartBody.Builder builder = new MultipartBody.Builder();
             builder.setType(MultipartBody.FORM);
-            for (Part part:params){
+            for (Part part : params) {
                 String key = part.getKey();
                 String value = part.getValue();
                 builder.addFormDataPart(key, value);
                 hasData = true;
             }
 
-            for (Part part:files){
+            for (Part part : files) {
                 String key = part.getKey();
                 FileWrapper file = part.getFileWrapper();
                 if (file != null) {
@@ -322,7 +329,7 @@ public class RequestParams {
             }
         } else {
             FormBody.Builder builder = new FormBody.Builder();
-            for (Part part:params){
+            for (Part part : params) {
                 String key = part.getKey();
                 String value = part.getValue();
                 builder.add(key, value);
@@ -336,7 +343,7 @@ public class RequestParams {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        for (Part part:params){
+        for (Part part : params) {
             String key = part.getKey();
             String value = part.getValue();
             if (result.length() > 0)
@@ -347,7 +354,7 @@ public class RequestParams {
             result.append(value);
         }
 
-        for (Part part:files){
+        for (Part part : files) {
             String key = part.getKey();
             if (result.length() > 0)
                 result.append("&");
@@ -357,7 +364,7 @@ public class RequestParams {
             result.append("FILE");
         }
 
-        if(jsonParams != null) {
+        if (jsonParams != null) {
             result.append(jsonParams.toJSONString());
         }
 

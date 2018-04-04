@@ -6,15 +6,19 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 /**
- * Desction:Android Manifest工具类
+ * 类名：ManifestUtils
+ * 编辑时间：2018/4/4
+ * 编辑人：崔婧
+ * 简介：Android Manifest工具类
  */
 public class ManifestUtils {
 
     /**
      * 获取Manifest Meta Data
-     * @param context
-     * @param metaKey
-     * @return
+     *
+     * @param context 上下文
+     * @param metaKey 标签名
+     * @return 标签名
      */
     public static String getMetaData(Context context, String metaKey) {
         String name = context.getPackageName();
@@ -37,18 +41,20 @@ public class ManifestUtils {
 
     /**
      * 获得渠道号
-     * @param context
-     * @param channelKey
-     * @return
+     *
+     * @param context    上下文
+     * @param channelKey 渠道名
+     * @return 标签名
      */
     public static String getChannelNo(Context context, String channelKey) {
         return getMetaData(context, channelKey);
     }
 
     /**
-     * 获得apk版本号
-     * @param context
-     * @return
+     * 获得apk版本名
+     *
+     * @param context 上下文
+     * @return 版本名
      */
     public static String getVersionName(Context context) {
         String version = "";
@@ -73,8 +79,9 @@ public class ManifestUtils {
 
     /**
      * 获得apk版本号
-     * @param context
-     * @return
+     *
+     * @param context 上下文
+     * @return 版本号
      */
     public static int getVersionCode(Context context) {
         int versionCode = 0;

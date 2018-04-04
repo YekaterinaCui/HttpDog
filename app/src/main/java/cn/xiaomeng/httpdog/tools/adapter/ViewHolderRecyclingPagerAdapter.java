@@ -14,7 +14,7 @@ public abstract class ViewHolderRecyclingPagerAdapter<VH extends ViewHolderRecyc
 
     public ViewHolderRecyclingPagerAdapter(Context context, List<T> list) {
         this.mContext = context;
-        this.mList= list;
+        this.mList = list;
         this.mInflater = LayoutInflater.from(mContext);
     }
 
@@ -48,7 +48,7 @@ public abstract class ViewHolderRecyclingPagerAdapter<VH extends ViewHolderRecyc
     /**
      * 返回列表数据
      *
-     * @return
+     * @return 返回列表数据
      */
     public List<T> getDatas() {
         return this.mList;

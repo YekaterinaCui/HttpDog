@@ -4,7 +4,10 @@ import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 
 /**
- * Desction:验证JSON合法性
+ * 类名：JsonValidator
+ * 编辑时间：2018/4/4
+ * 编辑人：崔婧
+ * 简介：验证JSON合法性
  */
 public class JsonValidator {
 
@@ -28,7 +31,9 @@ public class JsonValidator {
     }
 
     private boolean valid(String input) {
-        if ("".equals(input)) { return true; }
+        if ("".equals(input)) {
+            return true;
+        }
 
         boolean ret = true;
         it = new StringCharacterIterator(input);
@@ -59,7 +64,9 @@ public class JsonValidator {
     private boolean literal(String text) {
         CharacterIterator ci = new StringCharacterIterator(text);
         char t = ci.first();
-        if (c != t) { return false; }
+        if (c != t) {
+            return false;
+        }
 
         int start = col;
         boolean ret = true;
@@ -70,7 +77,9 @@ public class JsonValidator {
             }
         }
         nextCharacter();
-        if (!ret) { ; }
+        if (!ret) {
+            ;
+        }
         return ret;
     }
 
@@ -83,7 +92,9 @@ public class JsonValidator {
     }
 
     private boolean aggregate(char entryCharacter, char exitCharacter, boolean prefix) {
-        if (c != entryCharacter) { return false; }
+        if (c != entryCharacter) {
+            return false;
+        }
         nextCharacter();
         skipWhiteSpace();
         if (c == exitCharacter) {
@@ -94,9 +105,13 @@ public class JsonValidator {
         for (; ; ) {
             if (prefix) {
                 int start = col;
-                if (!string()) { return false; }
+                if (!string()) {
+                    return false;
+                }
                 skipWhiteSpace();
-                if (c != ':') { return false; }
+                if (c != ':') {
+                    return false;
+                }
                 nextCharacter();
                 skipWhiteSpace();
             }
@@ -120,20 +135,28 @@ public class JsonValidator {
     }
 
     private boolean number() {
-        if (!Character.isDigit(c) && c != '-') { return false; }
+        if (!Character.isDigit(c) && c != '-') {
+            return false;
+        }
         int start = col;
-        if (c == '-') { nextCharacter(); }
+        if (c == '-') {
+            nextCharacter();
+        }
         if (c == '0') {
             nextCharacter();
         } else if (Character.isDigit(c)) {
-            while (Character.isDigit(c)) { nextCharacter(); }
+            while (Character.isDigit(c)) {
+                nextCharacter();
+            }
         } else {
             return false;
         }
         if (c == '.') {
             nextCharacter();
             if (Character.isDigit(c)) {
-                while (Character.isDigit(c)) { nextCharacter(); }
+                while (Character.isDigit(c)) {
+                    nextCharacter();
+                }
             } else {
                 return false;
             }
@@ -144,7 +167,9 @@ public class JsonValidator {
                 nextCharacter();
             }
             if (Character.isDigit(c)) {
-                while (Character.isDigit(c)) { nextCharacter(); }
+                while (Character.isDigit(c)) {
+                    nextCharacter();
+                }
             } else {
                 return false;
             }
@@ -153,7 +178,9 @@ public class JsonValidator {
     }
 
     private boolean string() {
-        if (c != '"') { return false; }
+        if (c != '"') {
+            return false;
+        }
 
         boolean escaped = false;
         for (nextCharacter(); c != CharacterIterator.DONE; nextCharacter()) {
